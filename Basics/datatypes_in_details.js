@@ -38,5 +38,30 @@ console.log(typeof myfn);
 console.log(typeof myObjects);
 
 
+// Memories in Java
+
+// Stack(Primitive), Heap(Non-primitive type)
+let myFbname ="Samyog Pangeni"
+
+let anotherName= myFbname
+
+anotherName = "Smg beast"
+console.log(myFbname);
+console.log(anotherName);
+let user ={
+    email:"user@gmail.com",
+    Czship: "0010250"
+}
+console.log(user);
+let snUser = user
+snUser.email = "Sayeas"
+console.log(snUser);
+console.log(snUser.email);
+console.log(user.email);
+
+
+
+
+
 
 
