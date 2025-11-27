@@ -1,0 +1,1 @@
+console.log(Fruits[3]); 

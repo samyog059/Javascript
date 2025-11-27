@@ -1,11 +1,10 @@
-// singleton
-// object literals
-
 const User = {
-    "Full name": "Samyog",  // Property with spaces must be in quotes
-    College: "Waling Multiple Campus",
-    Class: 15,
-    LastLogindays: ["samyog", "Pangeni"]
-}
+  fullName: "Samyog",
+  college: "Waling Multiple Campus",
+  class: 15,
+  lastLoginDays: ["samyog", "Pangeni"],
+};
 
-console.log(User["Full name"]); // Use bracket notation without dot
+console.log(User.class);
+User.college = "Harvard University";
+console.log(User.college);
