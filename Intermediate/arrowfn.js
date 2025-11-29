@@ -46,6 +46,10 @@ const add = (a, b) => {
 
 console.log(add(10, 5)); // Output: 15
 
+const mul = (num1, num2) => {
+    return num1*num2
+}
+console.log(mul(25,36))
 
 // --------------------------------------------------------
 // Example 4: Arrow function returning an object
