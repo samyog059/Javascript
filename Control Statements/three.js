@@ -6,10 +6,10 @@ if(a>b && a>c){
     
 }
 else if(b>c && b>a){
-    console.log(`Largest number is ${b}`);
-    
+    console.log(`The Largest number is ${b}`);
+
 }
 else{
-    console.log(`Largest number is ${c}`);
+    console.log(`The Largest number is ${c}`);
     
 }
