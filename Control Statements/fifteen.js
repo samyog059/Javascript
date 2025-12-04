@@ -4,4 +4,5 @@ do{
     marks++
     
 }
+
 while (marks>100) 
