@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Color Changer — DOM Practice</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <style>
+    body { font-family: system-ui, sans-serif; padding: 2rem; transition: background 250ms; }
+    .controls{ display:flex; gap:0.5rem; margin-bottom:1rem; flex-wrap:wrap; }
+    button { padding: .6rem 1rem; border:1px solid #ccc; background:white; cursor:pointer; border-radius:6px; }
+    button.active { outline:3px solid rgba(0,0,0,0.08); transform:translateY(-2px); }
+    .palette { display:flex; gap:.5rem; align-items:center; flex-wrap:wrap; }
+    .swatch { width:40px; height:40px; border-radius:6px; border:1px solid rgba(0,0,0,0.08); cursor:pointer; }
+    .info { margin-top:1rem; color:#333a; }
+  </style>
+</head>
+<body>
+  <h1>Color Changer</h1>
+  <p>Click a swatch or type a CSS color to change the page background.</p>
+
+  <div class="controls">
+    <div class="palette" id="palette"></div>
+
+    <input id="colorInput" placeholder="Enter CSS color (e.g. tomato, #3498db, rgb(255,200,0))" style="flex:1; padding:.6rem; border-radius:6px; border:1px solid #ccc;">
+    <button id="randomBtn">Random</button>
+    <button id="resetBtn">Reset</button>
+  </div>
+
+  <div class="info" id="info">Current color: <span id="currentColor">white</span></div>
+
+  <script>
+    // ===== Setup =====
+    const paletteEl = document.getElementById('palette');
+    const colorInput = document.getElementById('colorInput');
+    const randomBtn = document.getElementById('randomBtn');
+    const resetBtn = document.getElementById('resetBtn');
+    const currentColorEl = document.getElementById('currentColor');
+
+    const presetColors = ['white', '#f6f8fa', '#ff6b6b', '#ff9f43', '#2dd4bf', '#38bdf8', '#6366f1', '#a78bfa', '#f472b6', '#fde68a'];
+
+    // Render color swatches
+    for (const c of presetColors) {
+      const sw = document.createElement('button');
+      sw.className = 'swatch';
+      sw.style.background = c;
+      sw.setAttribute('data-color', c);
+      sw.title = c;
+      paletteEl.appendChild(sw);
+    }
+
+    // ===== helpers =====
+    function setBackground(color) {
+      // Apply color and display text
+      document.body.style.background = color;
+      currentColorEl.textContent = color;
+      // Mark active swatch
+      document.querySelectorAll('.swatch').forEach(s => {
+        s.classList.toggle('active', s.getAttribute('data-color') === color);
+      });
+    }
+
+    function randomHex() {
+      return '#' + Math.floor(Math.random()*16777215).toString(16).padStart(6,'0');
+    }
+
+    // ===== events =====
+    // Event delegation: catch clicks on palette
+    paletteEl.addEventListener('click', (e) => {
+      const btn = e.target.closest('.swatch');
+      if (!btn) return;
+      const color = btn.getAttribute('data-color');
+      setBackground(color);
+    });
+
+    // Input: apply typed color on Enter
+    colorInput.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter') {
+        setBackground(colorInput.value.trim() || 'white');
+        colorInput.value = '';
+      }
+    });
+
+    // Random
+    randomBtn.addEventListener('click', () => setBackground(randomHex()));
+
+    // Reset
+    resetBtn.addEventListener('click', () => setBackground('white'));
+
+    // Initialize
+    setBackground('white');
+  </script>
+</body>
+</html>
