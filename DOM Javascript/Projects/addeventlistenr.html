@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>
+            Events
+        </title>
+    </head>
+    <body>
+        <button id="btn">
+            Click Here
+        </button>
+        <p id="msg"></p>
+    </body>
+    <script>
+        const btn =document.getElementById("btn")
+        const msg =document.getElementById("msg")
+
+        btn.addEventListener("click",()=>{
+            msg.textContent="Successfully worked"
+        })
+    </script>
+</html>
