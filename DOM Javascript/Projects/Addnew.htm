@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>
+            Adding new elements
+        </title>
+    </head>
+    <body>
+        <button id="add">Add Item</button>
+        <ul id="list"></ul>
+        <script>
+            const add = document.getElementById("add")
+            const list = document.getElementById("list")
+
+            add.addEventListener("click",()=>{
+                const li= document.createElement("li")
+                li.textContent="Samyog Pangeni"
+                list.appendChild(li)
+            })
+        </script>
+    </body>
+</html>
