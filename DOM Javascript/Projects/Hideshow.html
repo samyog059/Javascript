@@ -1,20 +1,49 @@
 <html>
     <head>
         <title>
-            Hide and show 
+            Hide and show
         </title>
     </head>
     <body>
         <button id="toggle">Hide/Show</button>
+
         <p id="box">I am visible</p>
+
         <script>
-            const toggle = document.getElementById("toggle")
-            const box = document.getElementById("box")
-            toggle.addEventListener("click",()=>{
-                if(box.style.display=="none"){
-                    box.style.display="block"
+            // 1. Get Elements from the Document Object Model (DOM)
+
+            // Get the button element using its ID and store it in a constant variable 'toggle'.
+            const toggle = document.getElementById("toggle"); 
+
+            // Get the paragraph element using its ID and store it in a constant variable 'box'.
+            const box = document.getElementById("box"); 
+
+            // 2. Attach an Event Listener
+
+            // 'toggle.addEventListener()' attaches a function (the second argument) 
+            // that should run every time the specified event (the first argument, "click") occurs on the 'toggle' element.
+            toggle.addEventListener("click", () => {
+                // 3. Define the Toggle Logic
+
+                // The 'if' statement checks the current visibility state of the 'box' element.
+                // It checks if the element's inline 'display' CSS property is set to "none".
+                // (Note: === is the strict equality operator, checking value AND type).
+                if (box.style.display === "none") {
+                    // This block runs IF the element is currently hidden.
+                    
+                    // Set the inline 'display' CSS property to "block".
+                    // This makes the paragraph element visible again (the 'show' part of the toggle).
+                    box.style.display = "block"; 
+
+                } else {
+                    // This block runs IF the element is NOT currently hidden (meaning it is visible).
+
+                    // Set the inline 'display' CSS property to "none".
+                    // This hides the paragraph element (the 'hide' part of the toggle).
+                    box.style.display = "none";
                 }
-            })
+            });
+            // The function closes, and the script finishes executing after the initial setup.
         </script>
     </body>
 </html>
