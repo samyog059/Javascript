@@ -7,5 +7,14 @@
     <body>
         <button id="toggle">Hide/Show</button>
         <p id="box">I am visible</p>
+        <script>
+            const toggle = document.getElementById("toggle")
+            const box = document.getElementById("box")
+            toggle.addEventListener("click",()=>{
+                if(box.style.display=="none"){
+                    box.style.display="block"
+                }
+            })
+        </script>
     </body>
 </html>
