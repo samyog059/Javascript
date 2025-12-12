@@ -1,0 +1,33 @@
+<h2 id="count">0</h2>
+
+<button id="inc">+</button>
+<button id="dec">-</button>
+<button id="reset">Reset</button>
+
+<script>
+  const countEl = document.getElementById("count");
+  const inc = document.getElementById("inc");
+  const dec = document.getElementById("dec");
+  const reset = document.getElementById("reset");
+
+  let count = 0;
+
+  function update() {
+    countEl.textContent = count;
+  }
+
+  inc.addEventListener("click", () => {
+    count++;
+    update();
+  });
+
+  dec.addEventListener("click", () => {
+    count--;
+    update();
+  });
+
+  reset.addEventListener("click", () => {
+    count = 0;
+    update();
+  });
+</script>
