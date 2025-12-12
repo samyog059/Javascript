@@ -1,0 +1,21 @@
+<html>
+    <head>
+        <title>
+            Counter
+        </title>
+    </head>
+    <body>
+        <h2 id="count">0</h2>
+        <button id="btn"></button>
+        <script>
+            const countr= document.getElementById("count")
+            const btn = document.getElementById("btn")
+
+            let count =0
+            btn.addEventListener("click",()=>{
+                count=count+1
+                countr.textContent= count
+            })
+        </script>
+    </body>
+</html>
