@@ -1,0 +1,17 @@
+<input type="password" id="pass">
+<button id="show">Show</button>
+
+<script>
+  const pass = document.getElementById("pass");
+  const show = document.getElementById("show");
+
+  show.addEventListener("click", () => {
+    if (pass.type === "password") {
+      pass.type = "text";
+      show.textContent = "Hide";
+    } else {
+      pass.type = "password";
+      show.textContent = "Show";
+    }
+  });
+</script>
