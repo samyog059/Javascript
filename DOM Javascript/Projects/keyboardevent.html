@@ -1,0 +1,13 @@
+<input id="box" placeholder="Press Enter">
+<p id="msg"></p>
+
+<script>
+  const box = document.getElementById("box");
+  const msg = document.getElementById("msg");
+
+  box.addEventListener("keydown", (e) => {
+    if (e.key === "Enter") {
+      msg.textContent = "Enter pressed!";
+    }
+  });
+</script>
