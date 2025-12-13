@@ -1,0 +1,18 @@
+<p id="text">Click the button to highlight me</p>
+<button id="btn">Toggle Highlight</button>
+
+<style>
+  .highlight {
+    background-color: yellow;
+    padding: 5px;
+  }
+</style>
+
+<script>
+  const text = document.getElementById("text");
+  const btn = document.getElementById("btn");
+
+  btn.addEventListener("click", () => {
+    text.classList.toggle("highlight");
+  });
+</script>
