@@ -1,14 +1,28 @@
 <h2 id="count">0</h2>
 <button id="btn">Increase</button>
+<button id="decrease">Decrease</button>
+<button id="reset">Reset</button>
 
 <script>
-  const countEl = document.getElementById("count"); // h2 select
-  const btn = document.getElementById("btn");       // button select
+  const countEl = document.getElementById("count");
+  const incBtn = document.getElementById("btn");
+  const decBtn = document.getElementById("decrease");
+  const resetBtn = document.getElementById("reset");
 
   let count = 0; // data stored in JS
-
-  btn.addEventListener("click", () => {
-    count = count + 1;           // number increase
-    countEl.textContent = count; // DOM update
-  });
+    function Counter(){
+        countEl.textContent = count;
+    }
+    incBtn.addEventListener("click",()=>{
+        count++
+        Counter()
+    })
+    decBtn.addEventListener("click",()=>{
+        count--
+        Counter()
+    })
+    resetBtn.addEventListener("click",()=>{
+        count = 0
+        Counter()
+    })
 </script>
