@@ -1,0 +1,21 @@
+<input id="name" placeholder="Enter name">
+<p id="msg"></p>
+
+<script>
+  const name = document.getElementById("name");
+  const msg = document.getElementById("msg");
+
+  name.addEventListener("input", () => {
+    if (name.value.length < 3) {
+      msg.textContent = "Name too short";
+      msg.style.color = "red";
+    } else if (name.value.length<9){
+      msg.textContent = "Looks good";
+      msg.style.color = "green";
+    }
+    else{
+        msg.textContent= "Too Long name oops"
+        msg.style.color="yellow"
+    }
+  });
+</script>
