@@ -1,0 +1,29 @@
+<form id="form">
+  <input id="email" placeholder="Email"><br><br>
+  <input id="password" type="password" placeholder="Password"><br><br>
+  <button>Submit</button>
+</form>
+
+<p id="error"></p>
+
+<script>
+  const form = document.getElementById("form");
+  const email = document.getElementById("email");
+  const password = document.getElementById("password");
+  const error = document.getElementById("error");
+
+  form.addEventListener("submit", (e) => {
+    e.preventDefault(); // page reload रोक्छ
+
+    if (email.value === "" || password.value === "") {
+      error.textContent = "All fields required";
+      error.style.color = "red";
+    } else if (password.value.length < 6) {
+      error.textContent = "Password too short";
+      
+    } else {
+      error.textContent = "Form submitted successfully!";
+      error.style.color = "green";
+    }
+  });
+</script>
