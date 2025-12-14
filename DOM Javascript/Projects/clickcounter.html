@@ -1,0 +1,14 @@
+<h2 id="count">0</h2>
+<button id="btn">Increase</button>
+
+<script>
+  const countEl = document.getElementById("count"); // h2 select
+  const btn = document.getElementById("btn");       // button select
+
+  let count = 0; // data stored in JS
+
+  btn.addEventListener("click", () => {
+    count = count + 1;           // number increase
+    countEl.textContent = count; // DOM update
+  });
+</script>
