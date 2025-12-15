@@ -1,48 +1,402 @@
-<h2>My To-Do List</h2>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beautiful To-Do List</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
 
-<input id="taskInput" placeholder="Enter a task">
-<button id="addBtn">Add</button>
-<ul id="taskList"></ul>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #6a11cb 0%, #2575fc 100%);
+            padding: 20px;
+        }
 
-<p id="msg"></p>
-<script>
-  // Select elements
-  const taskInput = document.getElementById("taskInput");
-  const addBtn = document.getElementById("addBtn");
-  const taskList = document.getElementById("taskList");
-  const msg = document.getElementById("msg");
+        .container {
+            width: 100%;
+            max-width: 500px;
+            background-color: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+            padding: 30px;
+            animation: fadeIn 0.5s ease-out;
+        }
 
-  // Add task
-  addBtn.addEventListener("click", () => {
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
-    // Validation
-    if (taskInput.value === "") {
-      msg.textContent = "Task cannot be empty!";
-      msg.style.color = "red";
-      return;
-    }
+        h2 {
+            text-align: center;
+            color: #333;
+            margin-bottom: 25px;
+            font-size: 2.2rem;
+            font-weight: 700;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            position: relative;
+            padding-bottom: 15px;
+        }
 
-    // Create list item
-    const li = document.createElement("li");
-    li.textContent = taskInput.value;
+        h2:after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 4px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            border-radius: 2px;
+        }
 
-    // Add delete button
-    const delBtn = document.createElement("button");
-    delBtn.textContent = "❌";
-    delBtn.style.marginLeft = "10px";
+        .input-container {
+            display: flex;
+            margin-bottom: 25px;
+            gap: 10px;
+        }
 
-    li.appendChild(delBtn);
-    taskList.appendChild(li);
+        #taskInput {
+            flex: 1;
+            padding: 16px 20px;
+            border: 2px solid #e1e5f2;
+            border-radius: 12px;
+            font-size: 1rem;
+            outline: none;
+            transition: all 0.3s;
+            background-color: #f8f9ff;
+        }
 
-    // Clear input & message
-    taskInput.value = "";
-    msg.textContent = "";
-  });
+        #taskInput:focus {
+            border-color: #6a11cb;
+            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+        }
 
-  // Delete task (event delegation)
-  taskList.addEventListener("click", (e) => {
-    if (e.target.tagName === "BUTTON") {
-      e.target.parentElement.remove();
-    }
-  });
-</script>
+        #taskInput::placeholder {
+            color: #aaa;
+        }
+
+        #addBtn {
+            padding: 0 28px;
+            background: linear-gradient(to right, #6a11cb, #2575fc);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+        }
+
+        #addBtn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 15px rgba(106, 17, 203, 0.4);
+        }
+
+        #addBtn:active {
+            transform: translateY(0);
+        }
+
+        #taskList {
+            list-style-type: none;
+            margin-top: 10px;
+            max-height: 400px;
+            overflow-y: auto;
+            padding-right: 5px;
+        }
+
+        #taskList::-webkit-scrollbar {
+            width: 6px;
+        }
+
+        #taskList::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 10px;
+        }
+
+        #taskList::-webkit-scrollbar-thumb {
+            background: linear-gradient(to bottom, #6a11cb, #2575fc);
+            border-radius: 10px;
+        }
+
+        #taskList li {
+            background-color: white;
+            margin-bottom: 12px;
+            padding: 18px 20px;
+            border-radius: 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            border-left: 5px solid #6a11cb;
+            animation: slideIn 0.3s ease-out;
+            transition: all 0.3s;
+        }
+
+        @keyframes slideIn {
+            from { opacity: 0; transform: translateX(-10px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        #taskList li:hover {
+            transform: translateX(5px);
+            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+        }
+
+        .task-text {
+            flex: 1;
+            font-size: 1.05rem;
+            color: #333;
+            word-break: break-word;
+            padding-right: 15px;
+        }
+
+        .delete-btn {
+            background: linear-gradient(to right, #ff416c, #ff4b2b);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            width: 36px;
+            height: 36px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+            flex-shrink: 0;
+        }
+
+        .delete-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3);
+        }
+
+        #msg {
+            text-align: center;
+            margin-top: 20px;
+            min-height: 24px;
+            font-weight: 500;
+            transition: all 0.3s;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 15px;
+            color: #ddd;
+        }
+
+        .empty-state p {
+            font-size: 1.1rem;
+        }
+
+        .task-counter {
+            text-align: center;
+            margin-top: 15px;
+            color: #666;
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .completed {
+            text-decoration: line-through;
+            opacity: 0.7;
+            border-left-color: #4CAF50 !important;
+        }
+
+        @media (max-width: 600px) {
+            .container {
+                padding: 20px;
+            }
+            
+            .input-container {
+                flex-direction: column;
+            }
+            
+            #addBtn {
+                padding: 16px;
+                width: 100%;
+            }
+            
+            h2 {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><i class="fas fa-tasks"></i> My To-Do List</h2>
+        
+        <div class="input-container">
+            <input id="taskInput" placeholder="Enter a new task...">
+            <button id="addBtn"><i class="fas fa-plus"></i> Add Task</button>
+        </div>
+        
+        <div id="taskContainer">
+            <ul id="taskList">
+                <!-- Tasks will be added here -->
+            </ul>
+            <div id="emptyState" class="empty-state">
+                <i class="far fa-clipboard"></i>
+                <p>No tasks yet. Add a task to get started!</p>
+            </div>
+        </div>
+        
+        <div class="task-counter">
+            Tasks: <span id="taskCount">0</span>
+        </div>
+        
+        <p id="msg"></p>
+    </div>
+
+    <script>
+        // Select elements
+        const taskInput = document.getElementById("taskInput");
+        const addBtn = document.getElementById("addBtn");
+        const taskList = document.getElementById("taskList");
+        const msg = document.getElementById("msg");
+        const emptyState = document.getElementById("emptyState");
+        const taskCount = document.getElementById("taskCount");
+
+        // Initialize task counter
+        updateTaskCounter();
+
+        // Add task when Add button is clicked
+        addBtn.addEventListener("click", addTask);
+
+        // Add task when Enter key is pressed
+        taskInput.addEventListener("keypress", function(e) {
+            if (e.key === "Enter") {
+                addTask();
+            }
+        });
+
+        // Function to add a task
+        function addTask() {
+            // Validation
+            if (taskInput.value.trim() === "") {
+                showMessage("Task cannot be empty!", "error");
+                taskInput.focus();
+                return;
+            }
+
+            // Hide empty state if visible
+            if (emptyState.style.display !== "none") {
+                emptyState.style.display = "none";
+            }
+
+            // Create list item
+            const li = document.createElement("li");
+            
+            // Create task text span
+            const taskText = document.createElement("span");
+            taskText.className = "task-text";
+            taskText.textContent = taskInput.value;
+            
+            // Add click to mark as completed
+            taskText.addEventListener("click", function() {
+                li.classList.toggle("completed");
+            });
+
+            // Create delete button
+            const delBtn = document.createElement("button");
+            delBtn.className = "delete-btn";
+            delBtn.innerHTML = '<i class="fas fa-trash"></i>';
+            delBtn.title = "Delete task";
+
+            li.appendChild(taskText);
+            li.appendChild(delBtn);
+            taskList.appendChild(li);
+
+            // Clear input & message
+            taskInput.value = "";
+            showMessage("Task added successfully!", "success");
+            taskInput.focus();
+            
+            // Update task counter
+            updateTaskCounter();
+        }
+
+        // Delete task (event delegation)
+        taskList.addEventListener("click", (e) => {
+            if (e.target.closest(".delete-btn")) {
+                const li = e.target.closest("li");
+                li.style.animation = "slideIn 0.3s ease-out reverse";
+                setTimeout(() => {
+                    li.remove();
+                    updateTaskCounter();
+                    
+                    // Show empty state if no tasks
+                    if (taskList.children.length === 0) {
+                        emptyState.style.display = "block";
+                    }
+                    
+                    showMessage("Task deleted.", "info");
+                }, 300);
+            }
+        });
+
+        // Function to show messages
+        function showMessage(message, type) {
+            msg.textContent = message;
+            msg.style.color = type === "error" ? "#ff416c" : 
+                              type === "success" ? "#4CAF50" : "#2575fc";
+            
+            // Clear message after 3 seconds
+            setTimeout(() => {
+                msg.textContent = "";
+            }, 3000);
+        }
+
+        // Function to update task counter
+        function updateTaskCounter() {
+            const count = taskList.children.length;
+            taskCount.textContent = count;
+        }
+
+        // Add some example tasks on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const exampleTasks = [
+                "Complete project proposal",
+                "Buy groceries",
+                "Call dentist for appointment",
+                "Prepare for meeting tomorrow"
+            ];
+            
+            // Add example tasks after a short delay
+            setTimeout(() => {
+                exampleTasks.forEach(task => {
+                    taskInput.value = task;
+                    addTask();
+                });
+            }, 500);
+        });
+    </script>
+</body>
+</html>
