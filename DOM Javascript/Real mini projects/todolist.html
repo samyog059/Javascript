@@ -1,0 +1,49 @@
+<h2>My To-Do List</h2>
+
+<input id="taskInput" placeholder="Enter a task">
+<button id="addBtn">Add</button>
+
+<ul id="taskList"></ul>
+
+<p id="msg"></p>
+<script>
+  // Select elements
+  const taskInput = document.getElementById("taskInput");
+  const addBtn = document.getElementById("addBtn");
+  const taskList = document.getElementById("taskList");
+  const msg = document.getElementById("msg");
+
+  // Add task
+  addBtn.addEventListener("click", () => {
+
+    // Validation
+    if (taskInput.value === "") {
+      msg.textContent = "Task cannot be empty!";
+      msg.style.color = "red";
+      return;
+    }
+
+    // Create list item
+    const li = document.createElement("li");
+    li.textContent = taskInput.value;
+
+    // Add delete button
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "❌";
+    delBtn.style.marginLeft = "10px";
+
+    li.appendChild(delBtn);
+    taskList.appendChild(li);
+
+    // Clear input & message
+    taskInput.value = "";
+    msg.textContent = "";
+  });
+
+  // Delete task (event delegation)
+  taskList.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      e.target.parentElement.remove();
+    }
+  });
+</script>
