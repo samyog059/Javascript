@@ -6,6 +6,7 @@
     <title>Beautiful To-Do List</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        /* ===== Basic Reset & Font ===== */
         * {
             margin: 0;
             padding: 0;
@@ -22,12 +23,13 @@
             padding: 20px;
         }
 
+        /* ===== Container Styling ===== */
         .container {
             width: 100%;
             max-width: 500px;
             background-color: rgba(255, 255, 255, 0.95);
             border-radius: 20px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             overflow: hidden;
             padding: 30px;
             animation: fadeIn 0.5s ease-out;
@@ -40,16 +42,15 @@
 
         h2 {
             text-align: center;
-            color: #333;
-            margin-bottom: 25px;
-            font-size: 2.2rem;
+            font-size: 2rem;
             font-weight: 700;
             background: linear-gradient(to right, #6a11cb, #2575fc);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
+            margin-bottom: 25px;
             position: relative;
-            padding-bottom: 15px;
+            padding-bottom: 10px;
         }
 
         h2:after {
@@ -58,32 +59,33 @@
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 80px;
+            width: 60px;
             height: 4px;
             background: linear-gradient(to right, #6a11cb, #2575fc);
             border-radius: 2px;
         }
 
+        /* ===== Input and Add Button ===== */
         .input-container {
             display: flex;
-            margin-bottom: 25px;
             gap: 10px;
+            margin-bottom: 20px;
         }
 
         #taskInput {
             flex: 1;
-            padding: 16px 20px;
+            padding: 14px 18px;
             border: 2px solid #e1e5f2;
             border-radius: 12px;
             font-size: 1rem;
             outline: none;
-            transition: all 0.3s;
             background-color: #f8f9ff;
+            transition: all 0.3s;
         }
 
         #taskInput:focus {
             border-color: #6a11cb;
-            box-shadow: 0 0 0 3px rgba(106, 17, 203, 0.1);
+            box-shadow: 0 0 0 3px rgba(106,17,203,0.1);
         }
 
         #taskInput::placeholder {
@@ -91,62 +93,42 @@
         }
 
         #addBtn {
-            padding: 0 28px;
+            padding: 0 20px;
             background: linear-gradient(to right, #6a11cb, #2575fc);
             color: white;
             border: none;
             border-radius: 12px;
-            font-size: 1rem;
             font-weight: 600;
             cursor: pointer;
-            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 8px;
-            box-shadow: 0 4px 12px rgba(106, 17, 203, 0.3);
+            gap: 6px;
+            transition: all 0.3s;
         }
 
         #addBtn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(106, 17, 203, 0.4);
+            box-shadow: 0 6px 12px rgba(106,17,203,0.4);
         }
 
-        #addBtn:active {
-            transform: translateY(0);
-        }
-
+        /* ===== Task List ===== */
         #taskList {
             list-style-type: none;
-            margin-top: 10px;
             max-height: 400px;
             overflow-y: auto;
             padding-right: 5px;
         }
 
-        #taskList::-webkit-scrollbar {
-            width: 6px;
-        }
-
-        #taskList::-webkit-scrollbar-track {
-            background: #f1f1f1;
-            border-radius: 10px;
-        }
-
-        #taskList::-webkit-scrollbar-thumb {
-            background: linear-gradient(to bottom, #6a11cb, #2575fc);
-            border-radius: 10px;
-        }
-
         #taskList li {
             background-color: white;
             margin-bottom: 12px;
-            padding: 18px 20px;
+            padding: 14px 18px;
             border-radius: 12px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            box-shadow: 0 3px 8px rgba(0, 0, 0, 0.08);
+            box-shadow: 0 3px 8px rgba(0,0,0,0.08);
             border-left: 5px solid #6a11cb;
             animation: slideIn 0.3s ease-out;
             transition: all 0.3s;
@@ -159,15 +141,14 @@
 
         #taskList li:hover {
             transform: translateX(5px);
-            box-shadow: 0 5px 12px rgba(0, 0, 0, 0.12);
+            box-shadow: 0 5px 12px rgba(0,0,0,0.12);
         }
 
         .task-text {
             flex: 1;
-            font-size: 1.05rem;
+            font-size: 1rem;
             color: #333;
-            word-break: break-word;
-            padding-right: 15px;
+            cursor: pointer;
         }
 
         .delete-btn {
@@ -177,42 +158,24 @@
             border-radius: 8px;
             width: 36px;
             height: 36px;
-            cursor: pointer;
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
             font-size: 0.9rem;
             transition: all 0.3s;
-            flex-shrink: 0;
         }
 
         .delete-btn:hover {
             transform: scale(1.1);
-            box-shadow: 0 4px 8px rgba(255, 65, 108, 0.3);
+            box-shadow: 0 4px 8px rgba(255,65,108,0.3);
         }
 
         #msg {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             min-height: 24px;
             font-weight: 500;
-            transition: all 0.3s;
-        }
-
-        .empty-state {
-            text-align: center;
-            padding: 40px 20px;
-            color: #888;
-        }
-
-        .empty-state i {
-            font-size: 3rem;
-            margin-bottom: 15px;
-            color: #ddd;
-        }
-
-        .empty-state p {
-            font-size: 1.1rem;
         }
 
         .task-counter {
@@ -225,175 +188,161 @@
 
         .completed {
             text-decoration: line-through;
-            opacity: 0.7;
+            opacity: 0.6;
             border-left-color: #4CAF50 !important;
         }
 
+        .empty-state {
+            text-align: center;
+            padding: 40px 20px;
+            color: #888;
+        }
+
+        .empty-state i {
+            font-size: 3rem;
+            margin-bottom: 10px;
+        }
+
+        .empty-state p {
+            font-size: 1rem;
+        }
+
         @media (max-width: 600px) {
-            .container {
-                padding: 20px;
-            }
-            
-            .input-container {
-                flex-direction: column;
-            }
-            
-            #addBtn {
-                padding: 16px;
-                width: 100%;
-            }
-            
-            h2 {
-                font-size: 1.8rem;
-            }
+            .input-container { flex-direction: column; }
+            #addBtn { width: 100%; padding: 14px 0; }
         }
     </style>
 </head>
 <body>
     <div class="container">
         <h2><i class="fas fa-tasks"></i> My To-Do List</h2>
-        
+
+        <!-- Input & Add Button -->
         <div class="input-container">
             <input id="taskInput" placeholder="Enter a new task...">
             <button id="addBtn"><i class="fas fa-plus"></i> Add Task</button>
         </div>
-        
+
+        <!-- Task List & Empty State -->
         <div id="taskContainer">
-            <ul id="taskList">
-                <!-- Tasks will be added here -->
-            </ul>
+            <ul id="taskList"></ul>
             <div id="emptyState" class="empty-state">
                 <i class="far fa-clipboard"></i>
                 <p>No tasks yet. Add a task to get started!</p>
             </div>
         </div>
-        
+
+        <!-- Task Counter -->
         <div class="task-counter">
             Tasks: <span id="taskCount">0</span>
         </div>
-        
+
+        <!-- Message -->
         <p id="msg"></p>
     </div>
 
     <script>
-        // Select elements
+        // ===== Select DOM elements =====
         const taskInput = document.getElementById("taskInput");
         const addBtn = document.getElementById("addBtn");
         const taskList = document.getElementById("taskList");
-        const msg = document.getElementById("msg");
         const emptyState = document.getElementById("emptyState");
         const taskCount = document.getElementById("taskCount");
+        const msg = document.getElementById("msg");
 
-        // Initialize task counter
-        updateTaskCounter();
+        // ===== Disable Add button initially =====
+        addBtn.disabled = true;
 
-        // Add task when Add button is clicked
-        addBtn.addEventListener("click", addTask);
-
-        // Add task when Enter key is pressed
-        taskInput.addEventListener("keypress", function(e) {
-            if (e.key === "Enter") {
-                addTask();
-            }
+        // ===== Enable Add button only if input is not empty =====
+        taskInput.addEventListener("input", () => {
+            addBtn.disabled = taskInput.value.trim() === "";
         });
 
-        // Function to add a task
+        // ===== Add Task function =====
         function addTask() {
+            const value = taskInput.value.trim();
+
             // Validation
-            if (taskInput.value.trim() === "") {
+            if (value === "") {
                 showMessage("Task cannot be empty!", "error");
                 taskInput.focus();
                 return;
             }
 
-            // Hide empty state if visible
+            // Hide empty state if tasks exist
             if (emptyState.style.display !== "none") {
                 emptyState.style.display = "none";
             }
 
-            // Create list item
+            // Create task item
             const li = document.createElement("li");
-            
-            // Create task text span
+
+            // Task text span
             const taskText = document.createElement("span");
             taskText.className = "task-text";
-            taskText.textContent = taskInput.value;
-            
-            // Add click to mark as completed
-            taskText.addEventListener("click", function() {
+            taskText.textContent = value;
+
+            // Click to toggle complete
+            taskText.addEventListener("click", () => {
                 li.classList.toggle("completed");
             });
 
-            // Create delete button
+            // Delete button
             const delBtn = document.createElement("button");
             delBtn.className = "delete-btn";
             delBtn.innerHTML = '<i class="fas fa-trash"></i>';
-            delBtn.title = "Delete task";
 
             li.appendChild(taskText);
             li.appendChild(delBtn);
             taskList.appendChild(li);
 
-            // Clear input & message
+            // Clear input
             taskInput.value = "";
+            addBtn.disabled = true;
+
             showMessage("Task added successfully!", "success");
-            taskInput.focus();
-            
-            // Update task counter
             updateTaskCounter();
         }
 
-        // Delete task (event delegation)
+        // ===== Add task on button click =====
+        addBtn.addEventListener("click", addTask);
+
+        // ===== Add task on Enter key press =====
+        taskInput.addEventListener("keypress", (e) => {
+            if (e.key === "Enter") addTask();
+        });
+
+        // ===== Delete Task using Event Delegation =====
         taskList.addEventListener("click", (e) => {
             if (e.target.closest(".delete-btn")) {
                 const li = e.target.closest("li");
-                li.style.animation = "slideIn 0.3s ease-out reverse";
-                setTimeout(() => {
-                    li.remove();
-                    updateTaskCounter();
-                    
-                    // Show empty state if no tasks
-                    if (taskList.children.length === 0) {
-                        emptyState.style.display = "block";
-                    }
-                    
-                    showMessage("Task deleted.", "info");
-                }, 300);
+                li.remove(); // Remove task
+                updateTaskCounter();
+
+                // Show empty state if no tasks
+                if (taskList.children.length === 0) {
+                    emptyState.style.display = "block";
+                }
+
+                showMessage("Task deleted.", "info");
             }
         });
 
-        // Function to show messages
+        // ===== Show message function =====
         function showMessage(message, type) {
             msg.textContent = message;
-            msg.style.color = type === "error" ? "#ff416c" : 
+            msg.style.color = type === "error" ? "#ff416c" :
                               type === "success" ? "#4CAF50" : "#2575fc";
-            
-            // Clear message after 3 seconds
+
             setTimeout(() => {
                 msg.textContent = "";
             }, 3000);
         }
 
-        // Function to update task counter
+        // ===== Update task counter =====
         function updateTaskCounter() {
-            const count = taskList.children.length;
-            taskCount.textContent = count;
+            taskCount.textContent = taskList.children.length;
         }
-
-        // Add some example tasks on load
-        window.addEventListener('DOMContentLoaded', () => {
-            const exampleTasks = [
-               
-            ];
-            
-            // Add example tasks after a short delay
-            setTimeout(() => {
-                exampleTasks.forEach(task => {
-                    taskInput.value = task;
-                    addTask();
-                });
-            }, 500);
-        });
     </script>
 </body>
 </html>
